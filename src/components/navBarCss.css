@@ -1,0 +1,11 @@
+.nav-header{
+    display: flex;
+    background-color: black;
+    justify-content: space-between;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+}
+a{
+    text-decoration: none;
+}
