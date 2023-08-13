@@ -9,23 +9,23 @@ const AppContextProvider= ({children}) => {
 
 
  const localStorgaeData = JSON.parse
- (localStorage.getItem("moviesDb"));
+ (localStorage.getItem("state"));
  const intialState= {
-  moviesData: localStorgaeData || movies,
+  moviesData: localStorgaeData.moviesData || movies,
   genreSelected:"",
   yearSelected:"",
   ratingSelecte:"",
   searchInput:"",
-  starredMovies:[],
-  wishListMovies:[]
+  starredMovies:localStorgaeData.starredMovies ||[],
+  wishListMovies:localStorgaeData.wishListMovies ||[]
  }
 
 
  const [moviesState, dispatch] = useReducer(reducer, intialState)
 
  useEffect(()=>{
-localStorage.setItem("moviesDb", JSON.stringify(moviesState.moviesData))
- },[moviesState.moviesData])
+localStorage.setItem("state", JSON.stringify(moviesState))
+ },[moviesState])
 
  const getUniqueGenreName = 
  moviesState.moviesData?.
@@ -57,33 +57,35 @@ const yearsArray = Array.from({ length: 2023 - 1990 + 1 }, (_, index) => (1990 +
 
 const ratingArray = ['1','2','3','4','5','6','7','8','9','10'];
 
+const searchedFilter = ()=>{
+  if(moviesState.searchInput?.length>0){
+    moviesState.searchInput.toLowerCase()
+return moviesState.moviesData?.filter((movie)=> movie.title.toLowerCase().
+includes(moviesState.searchInput.toLowerCase())
+  ||
+movie.director.toLowerCase().includes(moviesState.searchInput.toLowerCase())
+||
+  movie.cast.some((name) => name.includes(moviesState.searchInput.toLowerCase())))
 
-const searchedFilter = (moviesState.searchInput?.length>0) ?
-    moviesState.moviesData?.filter((movie)=>
- ( movie.title.toLowerCase().includes(moviesState.searchInput.toLowerCase()) ||  
-  movie.director.toLowerCase().includes(moviesState.searchInput.toLowerCase()) ||
-  movie.cast.filter((name) => name.includes(moviesState.searchInput.toLowerCase()))
 
- ))
-  :
-  
-   moviesState.moviesData
-  
-
-console.log(searchedFilter)
+  }else{
+    return moviesState.moviesData
+  }
+} 
+console.log(searchedFilter())
 
 const filterByYear = moviesState?.yearSelected.length > 0 ? 
-searchedFilter?.filter(({year})=> year === parseInt(moviesState?.yearSelected))
- : searchedFilter
+[...searchedFilter()]?.filter(({year})=> year === parseInt(moviesState?.yearSelected))
+ : [...searchedFilter()]
 
  const filterByRating = moviesState?.ratingSelecte.length > 0 ? 
  filterByYear?.filter(({rating})=> rating === parseInt(moviesState.ratingSelecte)) : filterByYear
 
  const filterList = moviesState?.genreSelected.length > 0 ?
- filterByRating.filter(movie => movie.cast.find(actor => 
-  actor.toLowerCase().includes(moviesState.searchInput.toLowerCase()))) : filterByRating
+ filterByRating.filter(movie => movie.genre.find(genre => 
+  genre.toLowerCase().includes(moviesState.genreSelected.toLowerCase()))) : filterByRating
 
-console.log(filterList);
+//console.log(filterList);
 
   return (
 

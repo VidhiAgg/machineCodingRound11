@@ -6,13 +6,19 @@ import { useNavigate, useParams } from 'react-router-dom'
 const HomePage = () => {
     const navigate = useNavigate();
     const {getUniqueGenreName, ratingArray, starredMovies,wishListMovies , dispatch, yearsArray, filterList} = useContext(AppContext)
-  return (
+  
+    const findStarred = (idInput)=> starredMovies?.some(({id})=>
+     id === parseInt(idInput))
+  
+     const findWishlist = (idInput)=> wishListMovies?.some(({id})=>
+     id === parseInt(idInput))
+
+    return (
     <div className='mainContainer'>
         <div className="filter-section">
 <h1>
     Movies
 </h1>
-
 
 <label htmlFor="genre-selector">
             <select 
@@ -75,8 +81,27 @@ const HomePage = () => {
                 {movie.summary}
             </div>
             <div className="btns">
-                <button></button>
-                <button></button>
+                <button 
+                onClick={(e)=>{
+                    e.stopPropagation();
+                    findStarred(movie.id) ? 
+                    dispatch({type:"removeStarred", payload: movie.id}) :
+
+                    dispatch({type:"addStarred", payload: movie.id})
+
+                }}
+                >{findStarred(movie.id)? "Remove Starred" : "Add to Starred"}</button>
+                <button
+                onClick={(e)=>{
+                    e.stopPropagation();
+                    findWishlist(movie.id) ? 
+                    dispatch({type:"removeWish", payload: movie.id}) :
+
+                    dispatch({type:"addWish", payload: movie.id})
+
+                }}
+                
+                >{findWishlist(movie.id)? "Remove From Wishlist" : "Add to Wishlist"}</button>
             </div>
         </div>
     )) :
