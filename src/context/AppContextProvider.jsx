@@ -20,9 +20,14 @@ const AppContextProvider= ({children}) => {
  }
 
 
+
  const [moviesState, dispatch] = useReducer(reducer, intialState)
 
  useEffect(()=>{
+  if(!localStorgaeData){
+    localStorage.setItem("state", JSON.stringify(intialState))
+
+  }
 localStorage.setItem("state", JSON.stringify(moviesState))
  },[moviesState, localStorgaeData])
 
