@@ -1,20 +1,43 @@
+.mainContainer{
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    width: 90%;
 
+}
+.summary p {
+    display: flex;
+    text-align: left;
+}
+.filter-section{
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    padding: 2rem;
+    width: 100%;
+
+}
 .movie-car{
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
+    justify-content: space-around;
 }
 .container-movie{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 250px;
+    width: 350px;
     height: fit-content;
 
 }
 .image, img{
     display: flex;
-    width: 250px;
-    height: 200px;
+    width: 350px;
+    height: 300px;
+    border: 1px;
+    border-radius: 23px;
+
 
 }

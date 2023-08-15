@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 export const reducer = (state, action)=>{
     switch(action.type){
 
@@ -5,6 +7,11 @@ case "genreSelection" :return{...state, genreSelected: action.payload}
 case "yearSelection":
     return{...state, yearSelected: action.payload}
 case "ratingSelection" :return{...state, ratingSelecte: action.payload
+}
+case " Add_movie" : {
+    console.log(action.payload);
+    toast.success("Added")
+return {...state, moviesData:[...state.moviesData, action.payload]}
 }
 
 case "addStarred" :

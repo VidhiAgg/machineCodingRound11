@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<HomePage/>} />
         <Route path="/addNew" element={<AddMovie/>} />
         <Route path ="/wishList" element={<WishlistPage/>} />
-        <Route path ="/movie:movieId" element={<MovieDetail/>} />
+        <Route path ="/movie/:movieId" element={<MovieDetail/>} />
      </Routes> 
     </div>
   );

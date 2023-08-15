@@ -1,9 +1,11 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { AppContext } from '../../context/AppContextProvider'
 import "./home.css"
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import AddMovie from '../AddMovie/AddMovie'
 
 const HomePage = () => {
+    const [showAddModal, setShowAddModal] = useState(false);
     const navigate = useNavigate();
     const {getUniqueGenreName, ratingArray, starredMovies,wishListMovies , dispatch, yearsArray, filterList} = useContext(AppContext)
   
@@ -40,8 +42,8 @@ const HomePage = () => {
             payload: event.target.value})}>
                 <option value="">Release Year</option>
                 {
-                yearsArray?.map((year, index) =>
-                    <option key={index} value={(year)}>{year}</option>)
+                yearsArray?.map((year) =>
+                    <option key={year} value={(year)}>{year}</option>)
                 }
             </select>
             </label>
@@ -59,7 +61,7 @@ const HomePage = () => {
             </label>
 
 <div className="button">
-    <button>Add a movie</button>
+    <button onClick={()=>setShowAddModal(true)}>Add a movie</button>
 </div>
         </div>
         <div className="movie-car">
@@ -78,10 +80,10 @@ const HomePage = () => {
                 <h3>{movie.title}</h3>
             </div>
             <div className="summary">
-                {movie.summary}
+               <p> {movie.summary}</p>
             </div>
             <div className="btns">
-                <button 
+                <button className='secondary'
                 onClick={(e)=>{
                     e.stopPropagation();
                     findStarred(movie.id) ? 
@@ -91,7 +93,7 @@ const HomePage = () => {
 
                 }}
                 >{findStarred(movie.id)? "Remove Starred" : "Add to Starred"}</button>
-                <button
+                <button className='primary'
                 onClick={(e)=>{
                     e.stopPropagation();
                     findWishlist(movie.id) ? 
@@ -110,6 +112,11 @@ const HomePage = () => {
     </h2>
 }
         </div>
+
+{
+    showAddModal && <AddMovie />
+}
+
     </div>
   )
 }

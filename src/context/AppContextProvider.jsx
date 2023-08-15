@@ -27,6 +27,12 @@ const AppContextProvider= ({children}) => {
 localStorage.setItem("state", JSON.stringify(moviesState))
  },[moviesState])
 
+
+const getMaximumId = moviesState.moviesData.reduce((maxValue,
+  {id}) =>  maxValue <= id ? id : maxValue, 0) +1;
+
+
+
  const getUniqueGenreName = 
  moviesState.moviesData?.
  reduce((genreList, {genre})=>
@@ -72,7 +78,7 @@ movie.director.toLowerCase().includes(moviesState.searchInput.toLowerCase())
     return moviesState.moviesData
   }
 } 
-console.log(searchedFilter())
+//console.log(searchedFilter())
 
 const filterByYear = moviesState?.yearSelected.length > 0 ? 
 [...searchedFilter()]?.filter(({year})=> year === parseInt(moviesState?.yearSelected))
@@ -90,7 +96,8 @@ const filterByYear = moviesState?.yearSelected.length > 0 ?
   return (
 
    <AppContext.Provider value={{filterList,getUniqueGenreName, 
-   moviesState,yearsArray,ratingArray, dispatch,
+   moviesState,yearsArray,ratingArray, dispatch,getMaximumId,
+   moviesDb : moviesState.moviesData,
     starredMovies: moviesState.starredMovies, wishListMovies : moviesState.wishListMovies}}>
 {children}
    </AppContext.Provider>

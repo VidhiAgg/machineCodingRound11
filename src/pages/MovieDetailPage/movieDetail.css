@@ -1,0 +1,28 @@
+.container{
+    display: flex;
+    margin: auto;
+    width: 80%;
+    padding: 3rem;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    gap: 1rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+
+}
+.image-contaier{
+    display: flex;
+}
+.image-contaier img{
+    display: flex;
+    height: 450px;
+}
+
+.details-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    width: 400px;
+}
