@@ -8,8 +8,7 @@ const AppContextProvider= ({children}) => {
  //const [moviesData, setMovieData] =  useState()
 
 
- const localStorgaeData = JSON.parse
- (localStorage.getItem("state"));
+ const localStorgaeData = JSON.parse(localStorage.getItem("state"));
  const intialState= {
   moviesData: localStorgaeData.moviesData || movies,
   genreSelected:"",
@@ -25,7 +24,7 @@ const AppContextProvider= ({children}) => {
 
  useEffect(()=>{
 localStorage.setItem("state", JSON.stringify(moviesState))
- },[moviesState])
+ },[moviesState, localStorgaeData])
 
 
 const getMaximumId = moviesState.moviesData.reduce((maxValue,
