@@ -76,12 +76,12 @@ const HomePage = () => {
                 <img src={movie.imageURL} alt="" />
 
             </div>
-            <div className="name">
+           
                 <h3>{movie.title}</h3>
-            </div>
-            <div className="summary">
+            
+          
                <p> {movie.summary}</p>
-            </div>
+            
             <div className="btns">
                 <button className='secondary'
                 onClick={(e)=>{

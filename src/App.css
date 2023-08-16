@@ -4,17 +4,18 @@
 
 .btns{
   display: flex;
+  align-items: middle;
   justify-content: space-between;
 
     gap: 5rem;
 }
 .btns button{
+  vertical-align: middle;
   /* padding: 10px;
   border-radius: 10px;
   width: fit-content; */
   padding: 10px;
   border-radius: 10px;
-  width: -moz-fit-content;
   width: 200px;
 }
 .secondary{
