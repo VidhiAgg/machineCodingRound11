@@ -10,7 +10,7 @@ const AppContextProvider= ({children}) => {
 
  const localStorgaeData = JSON.parse(localStorage.getItem("state"));
  const intialState= {
-  moviesData: localStorgaeData.moviesData || movies,
+  moviesData: localStorgaeData?.moviesData || movies,
   genreSelected:"",
   yearSelected:"",
   ratingSelecte:"",
