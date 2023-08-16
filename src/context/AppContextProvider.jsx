@@ -15,8 +15,8 @@ const AppContextProvider= ({children}) => {
   yearSelected:"",
   ratingSelecte:"",
   searchInput:"",
-  starredMovies:localStorgaeData.starredMovies ||[],
-  wishListMovies:localStorgaeData.wishListMovies ||[]
+  starredMovies:localStorgaeData?.starredMovies ||[],
+  wishListMovies:localStorgaeData?.wishListMovies ||[]
  }
 
 
